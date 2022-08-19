@@ -9,13 +9,13 @@ class Bet:
         self.name = user_name
 
     def won(self):
-        return f"User {self.name} with bet price: {self.price} won"
+        return f"User {self.name} with bet price {self.price} won"
 
 
 class BetList:
     """List of all contained bets"""
     def __init__(self):
-        self.max_bet = 0
+        self.max_bet = Bet(0, "NoName")
         self.bet_list = []
 
     def append(self, price: int, user_name: str):
@@ -28,7 +28,7 @@ class BetList:
         f"""Counts max bet price and return it\n
         Return: Object class: Bet"""
         for bet in self.bet_list:
-            self.max_bet = bet if bet.price > self.max_bet else self.max_bet
+            self.max_bet = bet if bet.price > self.max_bet.price else self.max_bet
         return self.max_bet
 
 
@@ -40,16 +40,10 @@ while game_not_ended:
     bet_list.append(bet_price, name)
     is_game_ended = input('Заканчиваем игру? Ответьте "Да" или "Нет"')
     if is_game_ended == "Да":
-        os.system('CLS')
-    else:
         game_not_ended = False
-bestValue = 0
-bestKey = ''
-for k in listOfPeapols:
-    if listOfPeapols[k] > bestValue:
-        bestValue = listOfPeapols[k]
-        bestKey = k
+    else:
+        os.system('CLS')
 
-
-print(f"Победитель: {bestKey}")
-time.sleep(10)
+win_bet = bet_list.max()
+print(win_bet.won())
+time.sleep(5)
