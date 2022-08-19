@@ -4,11 +4,13 @@ import time
 
 
 class Bet:
+    """One bet contains price and name user who has created this bet"""
     def __init__(self, price: int, user_name: str):
         self.price = price
         self.name = user_name
 
     def won(self):
+        """Returns a winning string"""
         return f"User {self.name} with bet price {self.price} won"
 
 
@@ -19,9 +21,7 @@ class BetList:
         self.bet_list = []
 
     def append(self, price: int, user_name: str):
-        f"""Appends new bet into a bet list.\n
-        Return: void
-        """
+        f"""Appends new bet into a bet list."""
         self.bet_list.append(Bet(price, user_name))
 
     def max(self):
@@ -35,11 +35,11 @@ class BetList:
 bet_list = BetList()
 game_not_ended = True
 while game_not_ended:
-    name = input("Введите ваше имя:\n")
-    bet_price = int(input("Введите сумму ставки:\n"))
+    name = input("Enter you name: ")
+    bet_price = int(input("Enter bet price: "))
     bet_list.append(bet_price, name)
-    is_game_ended = input('Заканчиваем игру? Ответьте "Да" или "Нет"')
-    if is_game_ended == "Да":
+    is_game_ended = input('Finish the auction? Yes/No')
+    if is_game_ended == "Yes":
         game_not_ended = False
     else:
         os.system('CLS')
